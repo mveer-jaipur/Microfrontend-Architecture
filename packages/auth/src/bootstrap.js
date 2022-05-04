@@ -4,12 +4,13 @@ import { createMemoryHistory, createBrowserHistory } from "history";
 import App from "./App";
 
 // Mount function to start up the app
-const mount = (el, { onNavigate, defaultHistroy, initialPath }) => {
+const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
   const history =
-    defaultHistroy ||
+    defaultHistory ||
     createMemoryHistory({
       initialEntries: [initialPath],
     });
+
   if (onNavigate) {
     history.listen(onNavigate);
   }
@@ -30,10 +31,10 @@ const mount = (el, { onNavigate, defaultHistroy, initialPath }) => {
 // If we are in development and in isolation,
 // call mount immediately
 if (process.env.NODE_ENV === "development") {
-  const devRoot = document.querySelector("#_marketing-dev-root");
+  const devRoot = document.querySelector("#_auth-dev-root");
 
   if (devRoot) {
-    mount(devRoot, { defaultHistroy: createBrowserHistory() });
+    mount(devRoot, { defaultHistory: createBrowserHistory() });
   }
 }
 
